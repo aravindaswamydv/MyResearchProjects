@@ -21,3 +21,12 @@ Scenario: user uploads document file
 	Then upload file window opens 
 	When user provide the file path to upload and hit Enter key 
 	Then provided file name displayed next to Browse button 
+
+@Hello
+Scenario Outline: Document search
+	Given user navigates to Document Library 
+	When user enter "<Property Name>" in property name Search column
+	Then resultatant property record display in the table
+Examples:
+	|Property Name|
+	|Olsen Hotel|

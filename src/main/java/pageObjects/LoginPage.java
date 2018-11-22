@@ -29,13 +29,13 @@ public LoginPage(WebDriver driver){
 	
 }
 
-@FindBy(how = How.XPATH, using = "//input[@name='username']") 
+@FindBy(how = How.XPATH, using = "//input[@formcontrolname='username']") 
 private WebElement inputField_Username;
 
 @FindBy(how = How.XPATH, using = "//input[@name='password']") 
 private WebElement inputField_Password;
 
-@FindBy(how = How.XPATH, using = "//button[@value='Login']") 
+@FindBy(how = How.XPATH, using = "//*[@id=\"cstm-body\"]/app-root/app-login/div/form/div/div/div/div/div[2]/div/div[2]/div/div/div[4]/button") 
 private WebElement btn_Login;
 
 public void navigateTo_LoginPage(){
@@ -55,7 +55,7 @@ public void enter_Password(){
 public void login() throws Exception{
 	
 	//accessHomePage("https://supportpulseasia.cbre.com.hk/#/login");
-	driver.get("https://supportpulseasia.cbre.com.hk/#/login?logoutclick=true");
+	//driver.get("https://supportpulseasia.cbre.com.hk/#/login?logoutclick=true");
 	enter_Username();
 	enter_Password();
 	click_Login();

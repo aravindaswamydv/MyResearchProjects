@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,6 @@ public class DashboardPage extends GenericFunctions{
 	WebDriver driver;
 	protected WebDriverWait driverWait;
 	int pageWeight=10;
-	
 	public DashboardPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -27,7 +27,7 @@ public class DashboardPage extends GenericFunctions{
 
 	}
 
-	@FindBy(how = How.XPATH, using = "//*[@id=\"building\"]")
+	@FindBy(how = How.XPATH, using = "//*[@id='building']")
 	private WebElement btn_AllProperties;
 
 	@FindAll(@FindBy(how = How.XPATH, using = "//ul[@class='building-lists']/li"))
@@ -36,10 +36,10 @@ public class DashboardPage extends GenericFunctions{
 	@FindBy(how = How.XPATH, using = "//*[@id=\"_tour_Occupancy\"]/div[3]/div/div[1]/div[2]/span")
 	private WebElement field_OcupancyValue;
 	
-	@FindBy(how = How.XPATH, using = "//*[@id='pulseAsiaBody']/screenshot/pulse-asia/header/div[1]/div[3]/div[2]/button[4]")
+	@FindBy(how = How.XPATH, using = "//*[@id='NAVIGATION_TOUR']/button")
 	private WebElement menuIcon;
 	
-	@FindBy(how = How.XPATH, using = "//*[@id='tour_Document']")
+	@FindBy(how = How.XPATH, using = "//*[@id='DOCUMENTLIBRARY_TOUR']")
 	private WebElement menuItemDocumentLibrary;
 	
 	@FindBy(how = How.XPATH, using = "//*[@id='pulseAsiaBody']/screenshot/pulse-asia/div[2]/document-library/div/div/div/div/div/div[1]/div/div[2]/button[2]")
@@ -48,15 +48,12 @@ public class DashboardPage extends GenericFunctions{
 	@FindBy(how = How.XPATH, using = "//*[@type='button' and @id='ufile']")
 	private WebElement btnBrowse;
 	
+	/*@FindBy(how = How.XPATH, using = xPathPropNameSearchField)
+	private WebElement propNameSearchField;*/
+	
 /*	@FindBy(how = How.XPATH, using = "//button[@ng-model='ct.fileUpload']")
 	private WebElement btnBrowse;*/
 	
-	
-	
-	
-	
-	
-
 	public void click_AllProperties() {
 		
 		click(driver,driverWait,btn_AllProperties);
@@ -148,5 +145,20 @@ public class DashboardPage extends GenericFunctions{
 		 
 		 waitForTime(10000);
 	}
+
+	public void filterTableBy(String filterColname, String filterValue) {
+		String pth = "//table//tr[1]", pth2 = "", pth3 = "//table//tr[2]";
+		String name;
+		for (int i = 1; i <= 7; i++) {
+			pth2 = pth + "/th[" + i + "]";
+			name = getText(driver, driverWait, By.xpath(pth2));
+			if (filterColname.equalsIgnoreCase(name)) {
+				pth3 = pth3 + "/th[" + i + "]";
+				enterTextField(driver, driverWait, By.xpath(pth3), filterValue);
+				break;
+			}
+		}	
+	}
+	
 
 }

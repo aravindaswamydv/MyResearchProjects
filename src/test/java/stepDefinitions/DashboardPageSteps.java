@@ -86,10 +86,18 @@ public class DashboardPageSteps {
 	public void provided_file_name_displayed_next_to_Browse_button() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 		dashboardPage.clickbutton();
-		
-	
 	    
 	}
+	
+	   @When("^user enter \"([^\"]*)\" in property name Search column$")
+	    public void user_enter_something_in_property_name_search_column(String propertyname) throws Throwable {
+		   String propName = propertyname;
+			dashboardPage.filterTableBy(" Property Name ",propName);
+	    }
 
+	    @Then("^resultatant property record display in the table$")
+	    public void resultatant_property_record_display_in_the_table() throws Throwable {
+	        
+	    }
 
 }
